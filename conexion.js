@@ -1,18 +1,18 @@
-const { createClient } = require("@supabase/supabase-js")
-require("dotenv").config()
+const { createClient } = require("@supabase/supabase-js");
+require("dotenv").config();
 
-const supabaseUrl = process.env.SUPABASE_URL
-const supabaseKey = process.env.SUPABASE_KEY 
-const supabaseAdminKey = process.env.SUPABASE_ADMIN_KEY
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseAdminKey) {
-  throw new Error("Variables de entorno no definidas")
+if (!supabaseUrl || !supabaseServiceRoleKey) {
+  throw new Error("Variables de entorno no definidas (falta URL o SERVICE ROLE)");
 }
 
-const supabasePublic = createClient(supabaseUrl, supabaseKey)
+const supabasePublic = createClient(supabaseUrl, supabaseAnonKey);
 
-const supabaseAdmin = createClient(supabaseUrl, supabaseAdminKey)
+const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
+  auth: { autoRefreshToken: false, persistSession: false }
+});
 
-
-
-module.exports = { supabasePublic, supabaseAdmin }
+module.exports = { supabasePublic, supabaseAdmin };
