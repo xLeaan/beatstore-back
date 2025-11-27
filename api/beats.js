@@ -24,6 +24,7 @@ router.post("/", upload.fields([{ name: "audio" }, { name: "imagen_beat" }]), as
                 contentType: file.mimetype,
             });
 
+        // console.log("INSERT ERROR DETAILS:", uploadError);
         if (uploadError) throw uploadError;
         
         const imagenName = `${Date.now()}-${imagen_beat.originalname}`;
