@@ -8,7 +8,10 @@ const shows = require("./api/shows")
 
 const app = express()
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: [
+    "http://localhost:3000",
+    "https://beatstore-lilac.vercel.app"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }))
@@ -28,3 +31,9 @@ app.post("/api/epayco/confirm", (req, res) => {
 })
 
 app.listen(5000, () => console.log("Backend en http://localhost:5000"))
+
+// const PORT = process.env.PORT || 5000;
+
+// app.listen(PORT, () => {
+//   console.log("Backend corriendo en el puerto " + PORT);
+// });
